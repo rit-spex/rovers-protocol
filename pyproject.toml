@@ -1,0 +1,13 @@
+[project]
+name = "rover-protocol"
+version = "1.0.0"
+description = "Shared rover compact wire protocol for basestation and ROS"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "PyYAML>=6.0",
+]
+
+[tool.pytest.ini_options]
+python_files = "test_*.py"
+addopts = "-q"

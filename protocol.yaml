@@ -1,0 +1,299 @@
+version: "1.0"
+
+data_types:
+  BOOLEAN:
+    num_bits: 1
+    id: 0x05
+  UINT_2_BOOL:
+    num_bits: 2
+    id: 0x01
+  UINT_8:
+    num_bits: 8
+    id: 0x02
+  UINT_8_JOYSTICK:
+    num_bits: 8
+    id: 0x04
+  UINT_16:
+    num_bits: 16
+    id: 0x03
+
+messages:
+  heartbeat:
+    id: 0x01
+    direction: to_rover
+    signals:
+      timestamp:
+        type: UINT_16
+        default: 0
+
+  xbox:
+    id: 0x02
+    direction: to_rover
+    signals:
+      AXIS_LY:
+        type: UINT_8_JOYSTICK
+        default: 100
+      AXIS_RY:
+        type: UINT_8_JOYSTICK
+        default: 100
+      A:
+        type: UINT_2_BOOL
+        default: false
+      B:
+        type: UINT_2_BOOL
+        default: false
+      X:
+        type: UINT_2_BOOL
+        default: false
+      Y:
+        type: UINT_2_BOOL
+        default: false
+      LEFT_BUMPER:
+        type: UINT_2_BOOL
+        default: false
+      RIGHT_BUMPER:
+        type: UINT_2_BOOL
+        default: false
+      AXIS_LT:
+        type: UINT_2_BOOL
+        default: false
+      AXIS_RT:
+        type: UINT_2_BOOL
+        default: false
+
+  n64:
+    id: 0x03
+    direction: to_rover
+    signals:
+      A: { type: UINT_2_BOOL, default: false }
+      B: { type: UINT_2_BOOL, default: false }
+      L: { type: UINT_2_BOOL, default: false }
+      R: { type: UINT_2_BOOL, default: false }
+      C_UP: { type: UINT_2_BOOL, default: false }
+      C_DOWN: { type: UINT_2_BOOL, default: false }
+      C_LEFT: { type: UINT_2_BOOL, default: false }
+      C_RIGHT: { type: UINT_2_BOOL, default: false }
+      DP_UP: { type: UINT_2_BOOL, default: false }
+      DP_DOWN: { type: UINT_2_BOOL, default: false }
+      DP_LEFT: { type: UINT_2_BOOL, default: false }
+      DP_RIGHT: { type: UINT_2_BOOL, default: false }
+      Z: { type: UINT_2_BOOL, default: false }
+
+  quit:
+    id: 0x04
+    direction: to_rover
+    signals:
+      QUIT:
+        type: BOOLEAN
+        default: true
+
+  auto_state:
+    id: 0x05
+    direction: to_rover
+    signals:
+      auto_state:
+        type: UINT_8
+        default: 0
+
+  life_detection:
+    id: 0xF0
+    direction: from_rover
+    signals:
+      color_sensor:
+        type: UINT_8
+        default: 0
+      limit_switch_1:
+        type: UINT_2_BOOL
+        default: false
+      limit_switch_2:
+        type: UINT_2_BOOL
+        default: false
+      auger_depth:
+        type: UINT_8
+        default: 0
+      pump_output_level:
+        type: UINT_8
+        default: 0
+      slide_position:
+        type: UINT_8
+        default: 0
+      selected_tube:
+        type: UINT_8
+        default: 0
+      spec_slide_position:
+        type: UINT_8
+        default: 0
+      spec_color_sensor:
+        type: UINT_8
+        default: 0
+
+  arm_encoders:
+    id: 0xF1
+    direction: from_rover
+    signals:
+      arm_base_position:
+        type: UINT_16
+        default: 0
+      shoulder_position:
+        type: UINT_16
+        default: 0
+      elbow_position:
+        type: UINT_16
+        default: 0
+      wrist_position:
+        type: UINT_16
+        default: 0
+      claw_encoder:
+        type: UINT_16
+        default: 0
+
+  drive_imu:
+    id: 0xF2
+    direction: from_rover
+    signals:
+      drive_speed_left:
+        type: UINT_8_JOYSTICK
+        default: 0.0
+      drive_speed_right:
+        type: UINT_8_JOYSTICK
+        default: 0.0
+      yaw:
+        type: UINT_16
+        default: 0
+      pitch:
+        type: UINT_16
+        default: 0
+      roll:
+        type: UINT_16
+        default: 0
+
+  rover_estop:
+    id: 0xF3
+    direction: from_rover
+    signals:
+      rover_estop:
+        type: BOOLEAN
+        default: false
+
+  subsystem_enabled:
+    id: 0xF4
+    direction: from_rover
+    signals:
+      arm_enabled:
+        type: BOOLEAN
+        default: false
+      auto_enabled:
+        type: BOOLEAN
+        default: false
+      life_enabled:
+        type: BOOLEAN
+        default: false
+
+  control_mode:
+    id: 0xF5
+    direction: from_rover
+    signals:
+      control_mode:
+        type: UINT_8
+        default: 0
+
+controllers:
+  xbox:
+    name: xbox
+    num_axes: 6
+    num_used_axes: 2
+    num_trigger: 2
+    num_buttons: 8
+    button_index_offset: 6
+    joystick:
+      min_value: 0
+      neutral_int: 100
+      neutral_float: 0.0
+      max_value: 200
+      axis_lx: 0
+      axis_ly: 1
+      axis_rx: 3
+      axis_ry: 2
+    trigger:
+      axis_lt: 4
+      axis_rt: 5
+    button:
+      "on": 2
+      "off": 1
+      a: 0
+      b: 1
+      x: 2
+      y: 3
+      left_bumper: 4
+      right_bumper: 5
+      select: 6
+      start: 7
+      home: 8
+      left_stick: 9
+      right_stick: 10
+    joypad:
+      up: [0, 1]
+      down: [0, -1]
+      left: [-1, 0]
+      right: [1, 0]
+
+  n64:
+    name: n64
+    num_axes: 2
+    num_used_axes: 0
+    num_trigger: 0
+    num_buttons: 14
+    joystick:
+      min_value: 0
+      neutral_int: 100
+      max_value: 200
+      axis_x: 0
+      axis_y: 1
+    button:
+      "on": 2
+      "off": 1
+      a: 1
+      b: 2
+      c_up: 9
+      c_down: 0
+      c_left: 3
+      c_right: 8
+      l: 4
+      r: 5
+      z: 6
+      start: 12
+      dp_up: 20
+      dp_down: 21
+      dp_left: 22
+      dp_right: 23
+    joypad:
+      up: [0, 1]
+      down: [0, -1]
+      left: [-1, 0]
+      right: [1, 0]
+
+communication:
+  serial:
+    default_port_linux: "/dev/ttyUSB0"
+    default_port_windows: "COM9"
+    baud_rate: 230400
+    remote_xbee_address: "0013A200423A7DDD"
+  udp:
+    host: "127.0.0.1"
+    basestation_port: 5000
+    rover_port: 5005
+    telemetry_port: 5002
+
+timing:
+  update_frequency_ms: 40
+  heartbeat_interval_ms: 500
+  deadband_threshold: 0.10
+
+controller_modes:
+  normal_multiplier: 1.0
+  creep_multiplier: 0.2
+  reverse_multiplier: -1.0
+
+auto_states:
+  min: 0
+  max: 5
