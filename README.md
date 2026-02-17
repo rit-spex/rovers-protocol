@@ -28,7 +28,7 @@ rovers-protocol/
 
 ## Usage
 
-Both consuming repos include this as a submodule at `lib/rovers-protocol/` and add it to `sys.path` via thin import bridges. No pip install needed just gotta remember to clone with `--recurse-submodules`.
+Both consuming repos include this as a submodule at `lib/rovers-protocol/` and add it to `sys.path` via wrapper modules. No pip install needed just gotta remember to clone with `--recurse-submodules`.
 
 ```python
 from rover_protocol import MessageEncoder, Signal, CONSTANTS

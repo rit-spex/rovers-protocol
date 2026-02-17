@@ -1,4 +1,4 @@
-"""Protocol schema loader for rover shared protocol."""
+"""Loads and caches protocol.yaml."""
 
 from __future__ import annotations
 

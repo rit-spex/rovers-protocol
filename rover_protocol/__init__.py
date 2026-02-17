@@ -1,4 +1,4 @@
-"""Shared rover protocol package used by basestation and ROS."""
+"""Rover protocol package."""
 
 from .codec import MessageEncoder, Signal
 from .constants import CONSTANTS, DataType, INPUT_TYPE

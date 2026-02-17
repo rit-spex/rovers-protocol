@@ -1,4 +1,4 @@
-"""Shared message encoder/decoder for rover protocol."""
+"""Message encoder/decoder for the rover protocol."""
 
 from __future__ import annotations
 

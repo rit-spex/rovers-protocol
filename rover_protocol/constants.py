@@ -1,4 +1,4 @@
-"""Shared constants and controller mappings for rover software."""
+"""Constants and controller mappings loaded from protocol.yaml."""
 
 from __future__ import annotations
 
@@ -43,7 +43,6 @@ _MESSAGE_IDS = {name: _as_int(defn["id"]) for name, defn in _MESSAGES.items()}
 _UPDATE_FREQUENCY_NS = _as_int(_PROTO["timing"]["update_frequency_ms"]) * 1_000_000
 _HEARTBEAT_NS = _as_int(_PROTO["timing"]["heartbeat_interval_ms"]) * 1_000_000
 
-# Shared input type enum
 INPUT_TYPE = _ns(IS_BUTTON=0, IS_AXIS=1, IS_TRIGGER=2)
 
 
