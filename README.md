@@ -51,9 +51,18 @@ decoded, message_id = encoder.decode_data(encoded)
 
 See the [basestation developer guide](https://github.com/rit-spex/rovers-basestation/blob/main/DEVELOPER_GUIDE.md) for better step-by-step instructions that I am too lazy to add here.
 
+## Installation & Development
+
+While mainly used as a submodule, you can install it in editable mode for better IDE support (autocomplete) or when `sys.path` hacks fail:
+
+```bash
+cd lib/rovers-protocol
+pip install -e .
+```
+
 ## Running tests
 
 ```bash
-pip install pyyaml
-python -m pytest tests/ -q
+pip install pytest pyyaml
+python -m pytest tests/
 ```
