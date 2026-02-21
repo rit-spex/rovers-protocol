@@ -281,9 +281,9 @@ class MessageEncoder:
     def _convert_uint8_joystick(self, value: Any) -> int:
         if isinstance(value, float):
             value = max(-1.0, min(1.0, value))
-            return int(value * 100 + 100)
+            return round(value * 100 + 100)
         if isinstance(value, int):
-            if value < 0 or value > 255:
+            if value < 0 or value > 200:
                 raise ValueError(f"Joystick value out of range: {value}")
             return value
         raise TypeError(f"Unsupported joystick type: {type(value)!r}")
@@ -317,7 +317,8 @@ class MessageEncoder:
         if dt == cm.UINT_2_BOOL:
             return value == 2
         if dt == cm.UINT_8_JOYSTICK:
-            return (float(value) - 100.0) / 100.0
+            clamped = max(0, min(200, int(value)))
+            return (float(clamped) - 100.0) / 100.0
         return value
 
 

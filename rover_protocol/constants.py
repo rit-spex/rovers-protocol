@@ -40,6 +40,12 @@ _DATA_TYPES = {
 
 _MESSAGES = _PROTO["messages"]
 _MESSAGE_IDS = {name: _as_int(defn["id"]) for name, defn in _MESSAGES.items()}
+_CAN_MESSAGES = _PROTO.get("can_messages", {})
+_OPEN_CAN_MESSAGES = _PROTO.get("open_can_messages", {})
+_CAN_MESSAGE_IDS = {name: _as_int(defn["id"]) for name, defn in _CAN_MESSAGES.items()}
+_OPEN_CAN_MESSAGE_IDS = {
+    name: _as_int(defn["id"]) for name, defn in _OPEN_CAN_MESSAGES.items()
+}
 _UPDATE_FREQUENCY_NS = _as_int(_PROTO["timing"]["update_frequency_ms"]) * 1_000_000
 _HEARTBEAT_NS = _as_int(_PROTO["timing"]["heartbeat_interval_ms"]) * 1_000_000
 
@@ -72,7 +78,7 @@ class _XboxTrigger:
 
 class _XboxButton:
     SIZE_BUTTON_IN_BITS = 2
-    NUM_BUTTONS_PER_BYTE = 8 / SIZE_BUTTON_IN_BITS
+    NUM_BUTTONS_PER_BYTE = 8 // SIZE_BUTTON_IN_BITS
 
     ON = _as_int(_PROTO["controllers"]["xbox"]["button"]["on"])
     OFF = _as_int(_PROTO["controllers"]["xbox"]["button"]["off"])
@@ -137,7 +143,7 @@ class _N64Joystick:
 
 class _N64Button:
     SIZE_BUTTON_IN_BITS = 2
-    NUM_BUTTONS_PER_BYTE = 8 / SIZE_BUTTON_IN_BITS
+    NUM_BUTTONS_PER_BYTE = 8 // SIZE_BUTTON_IN_BITS
 
     ON = _as_int(_PROTO["controllers"]["n64"]["button"]["on"])
     OFF = _as_int(_PROTO["controllers"]["n64"]["button"]["off"])
@@ -192,10 +198,20 @@ class _N64:
     JOYPAD = _N64Joypad
 
 
+def _build_message_namespace(message_ids: dict[str, int], definitions: dict):
+    id_entries = {f"{name.upper()}_ID": message_id for name, message_id in message_ids.items()}
+    return _ns(
+        **id_entries,
+        MESSAGE_ID_BY_NAME=_upper_keys(message_ids),
+        DEFINITIONS=definitions,
+    )
+
+
 class CONSTANTS:
     SIMULATION_MODE = False
+    # Framing marker prepended to combined controller messages so the receiver
+    # can recognise the start of an integrated data frame.
     START_MESSAGE = b"\xde"
-    QUIT_MESSAGE = b"\xfe"
 
     class CONVERSION:
         NS_PER_MS = 1_000_000
@@ -211,7 +227,6 @@ class CONSTANTS:
         INTERVAL = _HEARTBEAT_NS
 
     COMPACT_MESSAGES = _ns(
-        CONTROLLER_DATA=0xDE,
         N64_ID=_MESSAGE_IDS["n64"],
         XBOX_ID=_MESSAGE_IDS["xbox"],
         QUIT_ID=_MESSAGE_IDS["quit"],
@@ -229,11 +244,12 @@ class CONSTANTS:
         UINT_16=_DATA_TYPES["UINT_16"],
         UINT_8_JOYSTICK=_DATA_TYPES["UINT_8_JOYSTICK"],
         BOOLEAN=_DATA_TYPES["BOOLEAN"],
-        STATUS=0xB0,
-        ERROR=0xE0,
-        GPS=0xC0,
-        SENSOR=0xD0,
         MESSAGE_ID_BY_NAME=_upper_keys(_MESSAGE_IDS),
+    )
+
+    CAN_MESSAGES = _build_message_namespace(_CAN_MESSAGE_IDS, _CAN_MESSAGES)
+    OPEN_CAN_MESSAGES = _build_message_namespace(
+        _OPEN_CAN_MESSAGE_IDS, _OPEN_CAN_MESSAGES
     )
 
     class TIMING:
@@ -257,7 +273,8 @@ class CONSTANTS:
     )
 
     class QUIT:
-        NAME = "QUIT"
+        NAME = "quit"
+        QUIT_MESSAGE = "QUIT"
         VALUE = 1
 
     class AutoState:

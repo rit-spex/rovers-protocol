@@ -59,3 +59,18 @@ def test_xbox_alias_and_numeric_button_key_encode_same_bytes():
     )
 
     assert bytes(encoded_numeric) == bytes(encoded_alias)
+
+
+def test_can_and_open_can_definitions_loaded_from_protocol_yaml():
+    assert CONSTANTS.CAN_MESSAGES.ESTOP_ID == 0
+    assert CONSTANTS.CAN_MESSAGES.DRIVE_POWER_ID == 13
+    assert CONSTANTS.CAN_MESSAGES.READ_FLOROMETER_COLOR_SENSOR_ID == 67
+
+    assert CONSTANTS.OPEN_CAN_MESSAGES.SEND_BASE_ID == 1537
+    assert CONSTANTS.OPEN_CAN_MESSAGES.READ_ELBOW_ID == 1411
+
+    can_names = CONSTANTS.CAN_MESSAGES.MESSAGE_ID_BY_NAME
+    open_can_names = CONSTANTS.OPEN_CAN_MESSAGES.MESSAGE_ID_BY_NAME
+
+    assert can_names["ESTOP"] == 0
+    assert open_can_names["SEND_SHOULDER"] == 1538

@@ -16,6 +16,18 @@ data_types:
   UINT_16:
     num_bits: 16
     id: 0x03
+  UINT_32:
+    num_bits: 32
+    id: 0x06
+  INT_32:
+    num_bits: 32
+    id: 0x07
+  INT_16:
+    num_bits: 16
+    id: 0x08
+  FLOAT_32:
+    num_bits: 32
+    id: 0x09
 
 messages:
   heartbeat:
@@ -194,6 +206,571 @@ messages:
     direction: from_rover
     signals:
       control_mode:
+        type: UINT_8
+        default: 0
+
+can_messages:
+  estop:
+    id: 0
+    protocol: CAN
+    signals:
+      e_stop:
+        type: UINT_8
+        default: 0
+
+  ros_heartbeat:
+    id: 1
+    protocol: CAN
+    signals:
+      source:
+        type: UINT_8
+        default: 0
+      timestamp:
+        type: UINT_32
+        default: 0
+      enabled:
+        type: UINT_8
+        default: 0
+
+  teensy_heartbeat:
+    id: 2
+    protocol: CAN
+    signals:
+      source:
+        type: UINT_8
+        default: 0
+      timestamp:
+        type: UINT_32
+        default: 0
+      enabled:
+        type: UINT_8
+        default: 0
+
+  enable_chassis:
+    id: 10
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  drive_power:
+    id: 13
+    protocol: CAN
+    signals:
+      left:
+        type: FLOAT_32
+        default: 0
+      right:
+        type: FLOAT_32
+        default: 0
+
+  enable_arm:
+    id: 20
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  move_base:
+    id: 21
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  move_shoulder:
+    id: 22
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  move_elbow:
+    id: 23
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  bend_wrist:
+    id: 24
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  twist_wrist:
+    id: 25
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  move_claw:
+    id: 26
+    protocol: CAN
+    signals:
+      state:
+        type: UINT_8
+        default: 0
+
+  move_solenoid:
+    id: 27
+    protocol: CAN
+    signals:
+      enabled:
+        type: UINT_8
+        default: 1
+
+  read_base:
+    id: 30
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  read_shoulder:
+    id: 31
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  read_elbow:
+    id: 32
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  read_wrist_bend:
+    id: 33
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  read_wrist_twist:
+    id: 34
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+
+  read_claw:
+    id: 35
+    protocol: CAN
+    signals:
+      state:
+        type: UINT_8
+        default: 0
+      position:
+        type: INT_32
+        default: 0
+
+  enable_science:
+    id: 40
+    protocol: CAN
+    signals:
+      enabled:
+        type: UINT_8
+        default: 0
+
+  move_auger:
+    id: 41
+    protocol: CAN
+    signals:
+      position:
+        type: INT_32
+        default: 0
+      home:
+        type: UINT_8
+        default: 0
+
+  enable_drill:
+    id: 42
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  move_slide:
+    id: 43
+    protocol: CAN
+    signals:
+      stage:
+        type: UINT_8
+        default: 0
+      home:
+        type: UINT_8
+        default: 0
+
+  enable_pump1:
+    id: 44
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  enable_pump2:
+    id: 45
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  enable_pump3:
+    id: 46
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  enable_pump4:
+    id: 47
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  move_spectrometer_slide:
+    id: 48
+    protocol: CAN
+    signals:
+      stage:
+        type: UINT_8
+        default: 0
+      home:
+        type: UINT_8
+        default: 0
+
+  move_florometer_slide:
+    id: 49
+    protocol: CAN
+    signals:
+      stage:
+        type: UINT_8
+        default: 0
+      home:
+        type: UINT_8
+        default: 0
+
+  enable_florometer_micro_pump:
+    id: 50
+    protocol: CAN
+    signals:
+      enable:
+        type: UINT_8
+        default: 0
+
+  enable_primer:
+    id: 51
+    protocol: CAN
+    signals:
+      enabled:
+        type: UINT_8
+        default: 0
+
+  enable_vibration:
+    id: 52
+    protocol: CAN
+    signals:
+      enabled:
+        type: UINT_8
+        default: 0
+
+  read_auger:
+    id: 60
+    protocol: CAN
+    signals:
+      position:
+        type: UINT_8
+        default: 0
+      limit_switch:
+        type: UINT_8
+        default: 0
+
+  read_slide:
+    id: 61
+    protocol: CAN
+    signals:
+      stage:
+        type: UINT_8
+        default: 0
+      position:
+        type: INT_32
+        default: 0
+      limit_switch:
+        type: UINT_8
+        default: 0
+
+  read_drill:
+    id: 62
+    protocol: CAN
+    signals:
+      enabled:
+        type: UINT_8
+        default: 0
+
+  read_pumps:
+    id: 63
+    protocol: CAN
+    signals:
+      pump1_enabled:
+        type: UINT_8
+        default: 0
+      pump2_enabled:
+        type: UINT_8
+        default: 0
+      pump3_enabled:
+        type: UINT_8
+        default: 0
+      pump4_enabled:
+        type: UINT_8
+        default: 0
+
+  read_spectrometer_slide:
+    id: 64
+    protocol: CAN
+    signals:
+      stage:
+        type: UINT_8
+        default: 0
+      position:
+        type: INT_32
+        default: 0
+      limit_switch:
+        type: UINT_8
+        default: 0
+
+  read_florometer_slide:
+    id: 65
+    protocol: CAN
+    signals:
+      stage:
+        type: UINT_8
+        default: 0
+      position:
+        type: INT_32
+        default: 0
+      limit_switch:
+        type: UINT_8
+        default: 0
+
+  read_spectrometer_light:
+    id: 66
+    protocol: CAN
+    signals:
+      wavelength:
+        type: FLOAT_32
+        default: 0
+
+  read_florometer_color_sensor:
+    id: 67
+    protocol: CAN
+    signals:
+      red:
+        type: INT_16
+        default: 0
+      green:
+        type: INT_16
+        default: 0
+      blue:
+        type: INT_16
+        default: 0
+      violet:
+        type: INT_16
+        default: 0
+
+open_can_messages:
+  send_base:
+    id: 1537
+    protocol: OPEN_CAN
+    signals:
+      message_type:
+        type: UINT_8
+        default: 0
+      op_code_lsb:
+        type: UINT_8
+        default: 0
+      op_code_msb:
+        type: UINT_8
+        default: 96
+      empty:
+        type: UINT_8
+        default: 0
+      data_4:
+        type: UINT_8
+        default: 0
+      data_3:
+        type: UINT_8
+        default: 0
+      data_2:
+        type: UINT_8
+        default: 0
+      data_1:
+        type: UINT_8
+        default: 0
+
+  send_shoulder:
+    id: 1538
+    protocol: OPEN_CAN
+    signals:
+      message_type:
+        type: UINT_8
+        default: 0
+      op_code_lsb:
+        type: UINT_8
+        default: 0
+      op_code_msb:
+        type: UINT_8
+        default: 96
+      empty:
+        type: UINT_8
+        default: 0
+      data_4:
+        type: UINT_8
+        default: 0
+      data_3:
+        type: UINT_8
+        default: 0
+      data_2:
+        type: UINT_8
+        default: 0
+      data_1:
+        type: UINT_8
+        default: 0
+
+  send_elbow:
+    id: 1539
+    protocol: OPEN_CAN
+    signals:
+      message_type:
+        type: UINT_8
+        default: 0
+      op_code_lsb:
+        type: UINT_8
+        default: 0
+      op_code_msb:
+        type: UINT_8
+        default: 96
+      empty:
+        type: UINT_8
+        default: 0
+      data_4:
+        type: UINT_8
+        default: 0
+      data_3:
+        type: UINT_8
+        default: 0
+      data_2:
+        type: UINT_8
+        default: 0
+      data_1:
+        type: UINT_8
+        default: 0
+
+  read_base:
+    id: 1409
+    protocol: OPEN_CAN
+    signals:
+      message_type:
+        type: UINT_8
+        default: 67
+      op_code_lsb:
+        type: UINT_8
+        default: 0
+      op_code_msb:
+        type: UINT_8
+        default: 96
+      empty:
+        type: UINT_8
+        default: 0
+      data_4:
+        type: UINT_8
+        default: 0
+      data_3:
+        type: UINT_8
+        default: 0
+      data_2:
+        type: UINT_8
+        default: 0
+      data_1:
+        type: UINT_8
+        default: 0
+
+  read_shoulder:
+    id: 1410
+    protocol: OPEN_CAN
+    signals:
+      message_type:
+        type: UINT_8
+        default: 67
+      op_code_lsb:
+        type: UINT_8
+        default: 0
+      op_code_msb:
+        type: UINT_8
+        default: 96
+      empty:
+        type: UINT_8
+        default: 0
+      data_4:
+        type: UINT_8
+        default: 0
+      data_3:
+        type: UINT_8
+        default: 0
+      data_2:
+        type: UINT_8
+        default: 0
+      data_1:
+        type: UINT_8
+        default: 0
+
+  read_elbow:
+    id: 1411
+    protocol: OPEN_CAN
+    signals:
+      message_type:
+        type: UINT_8
+        default: 67
+      op_code_lsb:
+        type: UINT_8
+        default: 0
+      op_code_msb:
+        type: UINT_8
+        default: 96
+      empty:
+        type: UINT_8
+        default: 0
+      data_4:
+        type: UINT_8
+        default: 0
+      data_3:
+        type: UINT_8
+        default: 0
+      data_2:
+        type: UINT_8
+        default: 0
+      data_1:
         type: UINT_8
         default: 0
 

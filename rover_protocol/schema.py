@@ -22,7 +22,23 @@ def load_protocol_definition() -> Dict[str, Any]:
     if not isinstance(data, dict):
         raise ValueError("protocol.yaml must deserialize into a mapping")
 
-    if "messages" not in data or "data_types" not in data:
-        raise ValueError("protocol.yaml must define both 'messages' and 'data_types'")
+    required_sections = (
+        "messages",
+        "data_types",
+        "timing",
+        "communication",
+        "controllers",
+        "controller_modes",
+        "auto_states",
+    )
+    missing = [section for section in required_sections if section not in data]
+    if missing:
+        raise ValueError(
+            "protocol.yaml missing required sections: " + ", ".join(missing)
+        )
+
+    for section in required_sections:
+        if not isinstance(data[section], dict):
+            raise ValueError(f"protocol.yaml section '{section}' must be a mapping")
 
     return data
