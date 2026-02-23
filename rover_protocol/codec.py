@@ -64,6 +64,10 @@ class MessageEncoder:
             "UINT_8": CONSTANTS.COMPACT_MESSAGES.UINT_8,
             "UINT_8_JOYSTICK": CONSTANTS.COMPACT_MESSAGES.UINT_8_JOYSTICK,
             "UINT_16": CONSTANTS.COMPACT_MESSAGES.UINT_16,
+            "INT_16": CONSTANTS.COMPACT_MESSAGES.INT_16,
+            "UINT_32": CONSTANTS.COMPACT_MESSAGES.UINT_32,
+            "INT_32": CONSTANTS.COMPACT_MESSAGES.INT_32,
+            "FLOAT_32": CONSTANTS.COMPACT_MESSAGES.FLOAT_32,
         }
 
         for message_name, message_def in proto_messages.items():
@@ -276,6 +280,10 @@ class MessageEncoder:
             return self._convert_uint2_bool(value)
         if signal.type == cm.BOOLEAN:
             return self._convert_boolean(value)
+        if signal.type == cm.INT_16:
+            return self._convert_signed_int(value, 16)
+        if signal.type == cm.INT_32:
+            return self._convert_signed_int(value, 32)
         return int(value)
 
     def _convert_uint8_joystick(self, value: Any) -> int:
@@ -310,6 +318,16 @@ class MessageEncoder:
             return value
         raise TypeError(f"Unsupported boolean type: {type(value)!r}")
 
+    def _convert_signed_int(self, value: Any, bits: int) -> int:
+        """Convert a signed integer to unsigned two's complement for bit-packing."""
+        int_val = int(value)
+        max_val = (1 << (bits - 1)) - 1
+        min_val = -(1 << (bits - 1))
+        int_val = max(min_val, min(max_val, int_val))
+        if int_val < 0:
+            int_val = int_val + (1 << bits)
+        return int_val
+
     def _int_to_native(self, dt: DataType, value: int):
         cm = CONSTANTS.COMPACT_MESSAGES
         if dt == cm.BOOLEAN:
@@ -319,6 +337,17 @@ class MessageEncoder:
         if dt == cm.UINT_8_JOYSTICK:
             clamped = max(0, min(200, int(value)))
             return (float(clamped) - 100.0) / 100.0
+        if dt == cm.INT_16:
+            return self._unsigned_to_signed(value, 16)
+        if dt == cm.INT_32:
+            return self._unsigned_to_signed(value, 32)
+        return value
+
+    @staticmethod
+    def _unsigned_to_signed(value: int, bits: int) -> int:
+        """Convert unsigned two's complement back to a signed integer."""
+        if value >= (1 << (bits - 1)):
+            return value - (1 << bits)
         return value
 
 

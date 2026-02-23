@@ -229,6 +229,7 @@ class CONSTANTS:
     COMPACT_MESSAGES = _ns(
         N64_ID=_MESSAGE_IDS["n64"],
         XBOX_ID=_MESSAGE_IDS["xbox"],
+        SPACEMOUSE_ID=_MESSAGE_IDS["spacemouse"],
         QUIT_ID=_MESSAGE_IDS["quit"],
         HEARTBEAT_ID=_MESSAGE_IDS["heartbeat"],
         AUTO_STATE_ID=_MESSAGE_IDS["auto_state"],
@@ -244,6 +245,10 @@ class CONSTANTS:
         UINT_16=_DATA_TYPES["UINT_16"],
         UINT_8_JOYSTICK=_DATA_TYPES["UINT_8_JOYSTICK"],
         BOOLEAN=_DATA_TYPES["BOOLEAN"],
+        INT_16=_DATA_TYPES["INT_16"],
+        INT_32=_DATA_TYPES["INT_32"],
+        UINT_32=_DATA_TYPES["UINT_32"],
+        FLOAT_32=_DATA_TYPES["FLOAT_32"],
         MESSAGE_ID_BY_NAME=_upper_keys(_MESSAGE_IDS),
     )
 
@@ -287,3 +292,26 @@ class CONSTANTS:
     XBOX = _Xbox
     N64 = _N64
     PROTOCOL_DEFINITION = _PROTO
+
+
+class _SpaceMouse:
+    """SpaceMouse 3D mouse HID constants."""
+
+    NAME = str(_PROTO["controllers"]["spacemouse"]["name"])
+    VENDOR_ID = _as_int(_PROTO["controllers"]["spacemouse"]["vendor_id"])
+    PRODUCT_ID = _as_int(_PROTO["controllers"]["spacemouse"]["product_id"])
+
+    # Signal names matching protocol.yaml message signals
+    AXIS_X = str(_PROTO["controllers"]["spacemouse"]["axes"]["x"])
+    AXIS_Y = str(_PROTO["controllers"]["spacemouse"]["axes"]["y"])
+    AXIS_Z = str(_PROTO["controllers"]["spacemouse"]["axes"]["z"])
+    AXIS_RX = str(_PROTO["controllers"]["spacemouse"]["axes"]["rx"])
+    AXIS_RY = str(_PROTO["controllers"]["spacemouse"]["axes"]["ry"])
+    AXIS_RZ = str(_PROTO["controllers"]["spacemouse"]["axes"]["rz"])
+    BUTTONS = str(_PROTO["controllers"]["spacemouse"]["buttons"])
+
+    ALL_AXES = (AXIS_X, AXIS_Y, AXIS_Z, AXIS_RX, AXIS_RY, AXIS_RZ)
+
+
+# Attach to CONSTANTS after class definition
+CONSTANTS.SPACEMOUSE = _SpaceMouse

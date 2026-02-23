@@ -107,6 +107,18 @@ messages:
         type: UINT_8
         default: 0
 
+  spacemouse:
+    id: 0x06
+    direction: to_rover
+    signals:
+      x: { type: INT_16, default: 0 }
+      y: { type: INT_16, default: 0 }
+      z: { type: INT_16, default: 0 }
+      rx: { type: INT_16, default: 0 }
+      ry: { type: INT_16, default: 0 }
+      rz: { type: INT_16, default: 0 }
+      buttons: { type: UINT_16, default: 0 }
+
   life_detection:
     id: 0xF0
     direction: from_rover
@@ -848,6 +860,19 @@ controllers:
       down: [0, -1]
       left: [-1, 0]
       right: [1, 0]
+
+  spacemouse:
+    name: spacemouse
+    vendor_id: 0x256F
+    product_id: 0xC62E
+    axes:
+      x: "x"
+      y: "y"
+      z: "z"
+      rx: "rx"
+      ry: "ry"
+      rz: "rz"
+    buttons: "buttons"
 
 communication:
   serial:
