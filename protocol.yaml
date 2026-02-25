@@ -862,7 +862,7 @@ controllers:
       right: [1, 0]
 
   spacemouse:
-    name: spacemouse
+    name: 3Dconnexion SpaceMouse
     vendor_id: 0x256F
     product_id: 0xC62E
     axes:
