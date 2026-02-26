@@ -303,17 +303,17 @@ class _SpaceMouse:
 
     # Signal names matching protocol.yaml message signals
     AXIS_X = str(_PROTO["controllers"]["spacemouse"]["axes"]["x"])
-    AXIS_X_STR = "X"
+    AXIS_X_STR = "x"
     AXIS_Y = str(_PROTO["controllers"]["spacemouse"]["axes"]["y"])
-    AXIS_Y_STR = "Y"
+    AXIS_Y_STR = "y"
     AXIS_Z = str(_PROTO["controllers"]["spacemouse"]["axes"]["z"])
-    AXIS_Z_STR = "Z"
+    AXIS_Z_STR = "z"
     AXIS_RX = str(_PROTO["controllers"]["spacemouse"]["axes"]["rx"])
-    AXIS_RX_STR = "RX"
+    AXIS_RX_STR = "rx"
     AXIS_RY = str(_PROTO["controllers"]["spacemouse"]["axes"]["ry"])
-    AXIS_RY_STR = "RY"
+    AXIS_RY_STR = "ry"
     AXIS_RZ = str(_PROTO["controllers"]["spacemouse"]["axes"]["rz"])
-    AXIS_RZ_STR = "RZ"
+    AXIS_RZ_STR = "rz"
     BUTTONS = str(_PROTO["controllers"]["spacemouse"]["buttons"])
 
     ALL_AXES = (AXIS_X, AXIS_Y, AXIS_Z, AXIS_RX, AXIS_RY, AXIS_RZ)
