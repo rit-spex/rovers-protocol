@@ -156,19 +156,19 @@ messages:
     direction: from_rover
     signals:
       arm_base_position:
-        type: UINT_16
+        type: INT_16
         default: 0
       shoulder_position:
-        type: UINT_16
+        type: INT_16
         default: 0
       elbow_position:
-        type: UINT_16
+        type: INT_16
         default: 0
       wrist_position:
-        type: UINT_16
+        type: INT_16
         default: 0
       claw_encoder:
-        type: UINT_16
+        type: INT_16
         default: 0
 
   drive_imu:
