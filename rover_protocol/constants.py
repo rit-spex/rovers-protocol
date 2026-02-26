@@ -297,7 +297,7 @@ class CONSTANTS:
 class _SpaceMouse:
     """SpaceMouse 3D mouse HID constants."""
 
-    NAME = str(_PROTO["controllers"]["spacemouse"]["name"])
+    NAME = str(_PROTO["controllers"]["spacemouse"]["name"]).replace(" ", "_").replace("3Dc", "C")
     VENDOR_ID = _as_int(_PROTO["controllers"]["spacemouse"]["vendor_id"])
     PRODUCT_ID = _as_int(_PROTO["controllers"]["spacemouse"]["product_id"])
 
