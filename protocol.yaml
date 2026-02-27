@@ -187,7 +187,7 @@ messages:
       wrist_position:
         type: INT_16
         default: 0
-      claw_encoder:
+      gripper_encoder:
         type: INT_16
         default: 0
 
@@ -345,7 +345,7 @@ can_messages:
         type: FLOAT_32
         default: 0
 
-  move_claw:
+  move_gripper:
     id: 26
     protocol: CAN
     signals:
@@ -369,7 +369,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: FLOAT_32
+        type: INT_16
         default: 0
 
   read_shoulder:
@@ -377,7 +377,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: FLOAT_32
+        type: INT_16
         default: 0
 
   read_elbow:
@@ -385,7 +385,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: FLOAT_32
+        type: INT_16
         default: 0
 
   read_wrist_bend:
@@ -393,7 +393,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: FLOAT_32
+        type: INT_16
         default: 0
 
   read_wrist_twist:
@@ -401,10 +401,10 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: FLOAT_32
+        type: INT_16
         default: 0
 
-  read_claw:
+  read_gripper:
     id: 35
     protocol: CAN
     signals:
@@ -412,7 +412,7 @@ can_messages:
         type: UINT_8
         default: 0
       position:
-        type: FLOAT_32
+        type: INT_16
         default: 0
 
   enable_science:
