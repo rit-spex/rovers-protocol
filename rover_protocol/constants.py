@@ -230,6 +230,7 @@ class CONSTANTS:
         N64_ID=_MESSAGE_IDS["n64"],
         XBOX_ID=_MESSAGE_IDS["xbox"],
         SPACEMOUSE_ID=_MESSAGE_IDS["spacemouse"],
+        KEYBOARD_ID=_MESSAGE_IDS["keyboard"],
         QUIT_ID=_MESSAGE_IDS["quit"],
         HEARTBEAT_ID=_MESSAGE_IDS["heartbeat"],
         AUTO_STATE_ID=_MESSAGE_IDS["auto_state"],
