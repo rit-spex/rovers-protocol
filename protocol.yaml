@@ -119,6 +119,26 @@ messages:
       rz: { type: INT_16, default: 0 }
       buttons: { type: UINT_16, default: 0 }
 
+  keyboard:
+    id: 0x07
+    direction: to_rover
+    signals:
+      enable_science: { type: UINT_8, default: 0 }
+      move_auger_up: { type: UINT_8, default: 0 }
+      move_auger_down: { type: UINT_8, default: 0 }
+      auger_home: { type: UINT_8, default: 0 }
+      enable_drill: { type: UINT_8, default: 0 }
+      slide_next: { type: UINT_8, default: 0 }
+      pump_1: { type: UINT_8, default: 0 }
+      pump_2: { type: UINT_8, default: 0 }
+      pump_3: { type: UINT_8, default: 0 }
+      pump_4: { type: UINT_8, default: 0 }
+      spec_slide_next: { type: UINT_8, default: 0 }
+      fluoro_slide_next: { type: UINT_8, default: 0 }
+      fluoro_micro_pump: { type: UINT_8, default: 0 }
+      enable_primer: { type: UINT_8, default: 0 }
+      enable_vibration: { type: UINT_8, default: 0 }
+
   life_detection:
     id: 0xF0
     direction: from_rover
@@ -290,7 +310,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   move_shoulder:
@@ -298,7 +318,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   move_elbow:
@@ -306,7 +326,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   bend_wrist:
@@ -314,7 +334,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   twist_wrist:
@@ -322,7 +342,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   move_claw:
@@ -331,6 +351,9 @@ can_messages:
     signals:
       state:
         type: UINT_8
+        default: 0
+      position:
+        type: FLOAT_32
         default: 0
 
   move_solenoid:
@@ -346,7 +369,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   read_shoulder:
@@ -354,7 +377,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   read_elbow:
@@ -362,7 +385,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   read_wrist_bend:
@@ -370,7 +393,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   read_wrist_twist:
@@ -378,7 +401,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   read_claw:
@@ -389,7 +412,7 @@ can_messages:
         type: UINT_8
         default: 0
       position:
-        type: INT_32
+        type: FLOAT_32
         default: 0
 
   enable_science:
@@ -426,38 +449,14 @@ can_messages:
       stage:
         type: UINT_8
         default: 0
-      home:
-        type: UINT_8
-        default: 0
 
-  enable_pump1:
+  enable_pump:
     id: 44
     protocol: CAN
     signals:
-      enable:
+      id:
         type: UINT_8
         default: 0
-
-  enable_pump2:
-    id: 45
-    protocol: CAN
-    signals:
-      enable:
-        type: UINT_8
-        default: 0
-
-  enable_pump3:
-    id: 46
-    protocol: CAN
-    signals:
-      enable:
-        type: UINT_8
-        default: 0
-
-  enable_pump4:
-    id: 47
-    protocol: CAN
-    signals:
       enable:
         type: UINT_8
         default: 0
@@ -513,7 +512,7 @@ can_messages:
     protocol: CAN
     signals:
       position:
-        type: UINT_8
+        type: UINT_32
         default: 0
       limit_switch:
         type: UINT_8
