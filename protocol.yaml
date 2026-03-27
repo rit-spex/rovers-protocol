@@ -862,8 +862,8 @@ controllers:
 
   spacemouse:
     name: 3Dconnexion SpaceMouse
-    vendor_id: 0x256F
-    product_id: 0xC62E
+    vendor_id: 0x046d
+    product_id: 0xC625
     axes:
       x: "x"
       y: "y"
