@@ -184,10 +184,13 @@ messages:
       elbow_position:
         type: INT_16
         default: 0
-      wrist_position:
+      wrist_bend_position:
         type: INT_16
         default: 0
-      gripper_encoder:
+      wrist_twist_position:
+        type: INT_16
+        default: 0
+      gripper_position:
         type: INT_16
         default: 0
 
