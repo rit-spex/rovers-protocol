@@ -193,6 +193,12 @@ messages:
       gripper_position:
         type: INT_16
         default: 0
+      arm_solenoid_toggle:
+        type: BOOLEAN
+        default: 0
+      arm_operation_mode:
+        type: UINT_8
+        default: 0
 
   drive_imu:
     id: 0xF2
