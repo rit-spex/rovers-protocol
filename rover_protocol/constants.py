@@ -274,9 +274,14 @@ class CONSTANTS:
 
     CONTROLLER_MODES = _ns(
         NORMAL_MULTIPLIER=float(_PROTO["controller_modes"]["normal_multiplier"]),
-        CREEP_MULTIPLIER=float(_PROTO["controller_modes"]["creep_multiplier"]),
         REVERSE_MULTIPLIER=float(_PROTO["controller_modes"]["reverse_multiplier"]),
     )
+
+    class DRIVE_SPEED:
+        DEFAULT = _as_int(_PROTO["drive_speed"]["default"])
+        MIN = _as_int(_PROTO["drive_speed"]["min"])
+        MAX = _as_int(_PROTO["drive_speed"]["max"])
+        INCREMENT = _as_int(_PROTO["drive_speed"]["increment"])
 
     class QUIT:
         NAME = "quit"
@@ -292,7 +297,7 @@ class CONSTANTS:
 
     XBOX = _Xbox
     N64 = _N64
-    PROTOCOL_DEFINITION = _PROTO
+    PROTOCOL_DEFINITION = _PRwhOTO
 
 
 class _SpaceMouse:

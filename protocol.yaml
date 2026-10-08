@@ -901,7 +901,6 @@ timing:
 
 controller_modes:
   normal_multiplier: 1.0
-  creep_multiplier: 0.2
   reverse_multiplier: -1.0
 
 auto_states:
