@@ -903,6 +903,12 @@ controller_modes:
   normal_multiplier: 1.0
   reverse_multiplier: -1.0
 
+drive_speed:
+  default: 25
+  min: 0
+  max: 100
+  increment: 25
+
 auto_states:
   min: 0
   max: 5
