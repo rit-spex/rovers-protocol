@@ -297,7 +297,7 @@ class CONSTANTS:
 
     XBOX = _Xbox
     N64 = _N64
-    PROTOCOL_DEFINITION = _PRwhOTO
+    PROTOCOL_DEFINITION = _PROTO
 
 
 class _SpaceMouse:
