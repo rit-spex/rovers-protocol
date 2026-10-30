@@ -911,7 +911,7 @@ drive_speed:
 
 auto_states:
   min: 0
-  max: 2
+  max: 5
   modes:
     teleop: 0
     auto_pathfind: 1
