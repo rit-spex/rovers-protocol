@@ -139,6 +139,34 @@ messages:
       enable_primer: { type: UINT_8, default: 0 }
       enable_vibration: { type: UINT_8, default: 0 }
 
+  arm_state:
+    id: 0x08
+    direction: to_rover
+    signals:
+      # Per-action press state from the basestation keyboard:
+      # 0 = not pressed, 1 = just pressed, 2 = held, 3 = just released.
+      # The rover acts on 1, so the key map lives only on the basestation.
+      flip: { type: UINT_8, default: 0 }
+      home: { type: UINT_8, default: 0 }
+      position_drive: { type: UINT_8, default: 0 }
+      joint_drive: { type: UINT_8, default: 0 }
+      pnp_normal: { type: UINT_8, default: 0 }
+      toggle_planar: { type: UINT_8, default: 0 }
+      guide_orientation: { type: UINT_8, default: 0 }
+      toggle_position_lock: { type: UINT_8, default: 0 }
+      toggle_orientation_lock: { type: UINT_8, default: 0 }
+      toggle_joint_lock_0: { type: UINT_8, default: 0 }
+      toggle_joint_lock_1: { type: UINT_8, default: 0 }
+      toggle_joint_lock_2: { type: UINT_8, default: 0 }
+      toggle_joint_lock_3: { type: UINT_8, default: 0 }
+      toggle_joint_lock_4: { type: UINT_8, default: 0 }
+      home_joint_0: { type: UINT_8, default: 0 }
+      home_joint_1: { type: UINT_8, default: 0 }
+      home_joint_2: { type: UINT_8, default: 0 }
+      home_joint_3: { type: UINT_8, default: 0 }
+      home_joint_4: { type: UINT_8, default: 0 }
+      solenoid_strike: { type: UINT_8, default: 0 }
+
   life_detection:
     id: 0xF0
     direction: from_rover
@@ -199,6 +227,15 @@ messages:
       arm_operation_mode:
         type: UINT_8
         default: 0
+      locked_joints:
+        type: UINT_8
+        default: 0
+      homing_joints:
+        type: UINT_8
+        default: 0
+      arm_flags:
+        type: UINT_16
+        default: 0
 
   drive_imu:
     id: 0xF2
@@ -249,6 +286,30 @@ messages:
       control_mode:
         type: UINT_8
         default: 0
+
+  arm_status:
+    id: 0xF6
+    direction: from_rover
+    signals:
+      # Last arm command rejection, for the basestation error banner.
+      # arm_error_seq increments on every new rejection so the display can
+      # tell a repeated error from a stale one.
+      arm_error_code: { type: UINT_8, default: 0 }
+      arm_error_arg: { type: UINT_8, default: 0 }
+      arm_error_seq: { type: UINT_8, default: 0 }
+
+  arm_pose:
+    id: 0xF7
+    direction: from_rover
+    signals:
+      # Measured end-effector pose in the arm base frame. Positions are
+      # centi-inches and angles are centi-degrees, matching arm_encoders.
+      pose_x: { type: INT_16, default: 0 }
+      pose_y: { type: INT_16, default: 0 }
+      pose_z: { type: INT_16, default: 0 }
+      pose_roll: { type: INT_16, default: 0 }
+      pose_pitch: { type: INT_16, default: 0 }
+      pose_yaw: { type: INT_16, default: 0 }
 
 can_messages:
   estop:
@@ -896,7 +957,7 @@ communication:
 
 timing:
   update_frequency_ms: 40
-  heartbeat_interval_ms: 500
+  heartbeat_interval_ms: 200
   deadband_threshold: 0.10
 
 controller_modes:
