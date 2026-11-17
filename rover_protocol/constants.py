@@ -292,6 +292,13 @@ class CONSTANTS:
         NAME = "auto_state"
         MIN = _as_int(_PROTO["auto_states"]["min"])
         MAX = _as_int(_PROTO["auto_states"]["max"])
+        TELEOP = _as_int(_PROTO["auto_states"]["modes"]["teleop"])
+        AUTO_PATHFIND = _as_int(_PROTO["auto_states"]["modes"]["auto_pathfind"])
+        AUTO_ASTRONAUT = _as_int(_PROTO["auto_states"]["modes"]["auto_astronaut"])
+        NAME_BY_VALUE = {
+            _as_int(value): name
+            for name, value in _PROTO["auto_states"]["modes"].items()
+        }
 
     AUTO_STATE = AutoState
 
