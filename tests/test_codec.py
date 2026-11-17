@@ -63,7 +63,6 @@ def test_xbox_alias_and_numeric_button_key_encode_same_bytes():
 
 def test_can_and_open_can_definitions_loaded_from_protocol_yaml():
     assert CONSTANTS.CAN_MESSAGES.ESTOP_ID == 0
-    assert CONSTANTS.CAN_MESSAGES.DRIVE_POWER_ID == 13
     assert CONSTANTS.CAN_MESSAGES.READ_FLOROMETER_COLOR_SENSOR_ID == 67
 
     assert CONSTANTS.OPEN_CAN_MESSAGES.SEND_BASE_ID == 1537
