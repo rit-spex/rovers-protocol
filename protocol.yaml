@@ -204,11 +204,17 @@ messages:
     id: 0xF2
     direction: from_rover
     signals:
-      drive_speed_left:
-        type: UINT_8_JOYSTICK
+      drive_fr_vel:
+        type: FLOAT_32
         default: 0.0
-      drive_speed_right:
-        type: UINT_8_JOYSTICK
+      drive_fl_vel:
+        type: FLOAT_32
+        default: 0.0
+      drive_br_vel:
+        type: FLOAT_32
+        default: 0.0
+      drive_bl_vel:
+        type: FLOAT_32
         default: 0.0
       yaw:
         type: UINT_16
@@ -293,17 +299,6 @@ can_messages:
     signals:
       enable:
         type: UINT_8
-        default: 0
-
-  drive_power:
-    id: 13
-    protocol: CAN
-    signals:
-      left:
-        type: FLOAT_32
-        default: 0
-      right:
-        type: FLOAT_32
         default: 0
 
   enable_arm:
