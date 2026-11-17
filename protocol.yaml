@@ -165,6 +165,8 @@ messages:
       home_joint_2: { type: UINT_8, default: 0 }
       home_joint_3: { type: UINT_8, default: 0 }
       home_joint_4: { type: UINT_8, default: 0 }
+      gripper_up: { type: UINT_8, default: 0 }
+      gripper_down: { type: UINT_8, default: 0 }
       solenoid_strike: { type: UINT_8, default: 0 }
 
   life_detection:
