@@ -18,6 +18,10 @@ def test_arm_status_roundtrip():
         "arm_error_code": ARM_ERROR_OCTANT_REQUIRES_PLANAR,
         "arm_error_arg": 5,
         "arm_error_seq": 9,
+        "arm_operation_mode": 4,
+        "locked_joints": 0,
+        "homing_joints": 0,
+        "arm_flags": 1 << 7,
     }
     encoded = encoder.encode_data(
         payload, CONSTANTS.COMPACT_MESSAGES.ARM_STATUS_ID)

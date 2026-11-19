@@ -168,6 +168,10 @@ messages:
       gripper_up: { type: UINT_8, default: 0 }
       gripper_down: { type: UINT_8, default: 0 }
       solenoid_strike: { type: UINT_8, default: 0 }
+      # Rest mode (R key): slow collapse, torque-off, and restore.
+      rest: { type: UINT_8, default: 0 }
+      # Straight-up depower/test pose (Z key).
+      zenith: { type: UINT_8, default: 0 }
 
   life_detection:
     id: 0xF0
@@ -226,6 +230,7 @@ messages:
       arm_solenoid_toggle:
         type: BOOLEAN
         default: 0
+      # 0 PNP, 1 PNP flipped, 2 planar, 3 homing, 4 zenith, 5 resting.
       arm_operation_mode:
         type: UINT_8
         default: 0
@@ -235,6 +240,9 @@ messages:
       homing_joints:
         type: UINT_8
         default: 0
+      # Bit set = active: 0 HOMING, 1 FLIPPING, 2 FLIPPED, 3 PLANAR,
+      # 4 JOINT_DRIVE, 5 POSITION_LOCK, 6 ORIENTATION_LOCK, 7 ZENITH,
+      # 8 RESTING.
       arm_flags:
         type: UINT_16
         default: 0
@@ -299,6 +307,14 @@ messages:
       arm_error_code: { type: UINT_8, default: 0 }
       arm_error_arg: { type: UINT_8, default: 0 }
       arm_error_seq: { type: UINT_8, default: 0 }
+      # Current mode and flags, mirrored from arm_encoders.  Repeated here so
+      # the basestation can update its stored arm state immediately, even
+      # before every joint angle has arrived (for example right after the
+      # planner infers a mode from the measured startup pose).
+      arm_operation_mode: { type: UINT_8, default: 0 }
+      locked_joints: { type: UINT_8, default: 0 }
+      homing_joints: { type: UINT_8, default: 0 }
+      arm_flags: { type: UINT_16, default: 0 }
 
   arm_pose:
     id: 0xF7

@@ -122,11 +122,11 @@ _TEXT = {
     ARM_ERROR_GUIDE_NOT_ALIGNED:
         "Guide unavailable - orientation not aligned",
     ARM_ERROR_NORMAL_OCTANT:
-        "Normal unavailable in this octant - press X",
+        "Normal unavailable in this octant - press P",
     ARM_ERROR_NORMAL_LIMITS:
         "Normal unavailable - outside normal limits",
     ARM_ERROR_FLIPPED_OCTANT:
-        "Flipped unavailable in this octant - press X",
+        "Flipped unavailable in this octant - press P",
     ARM_ERROR_FLIPPED_LIMITS:
         "Flipped unavailable - outside flipped limits",
     ARM_ERROR_NOT_READY:
@@ -147,9 +147,9 @@ def error_text(code: int, argument: int = 0) -> str:
     if code == ARM_ERROR_NONE:
         return ""
     if code == ARM_ERROR_OCTANT_REQUIRES_PLANAR:
-        return f"Octant {argument} requires Planar - press X"
+        return f"Octant {argument} requires Planar - press P"
     if code == ARM_ERROR_FLIP_OCTANT:
-        return f"Flip blocked: octant {argument} requires Planar - press X"
+        return f"Flip blocked: octant {argument} requires Planar - press P"
     return _TEXT.get(code, f"Arm error {code}")
 
 
